@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Random Kobold Generator In Colour Entry page</title>
+    
+	<meta charset="UTF-8">
+	<meta name="description" content="Kobolds are my Baby! Random Kobold Generator">
+	<meta name="keywords" content="Ninth Age Games,Character Generator,HTML,CSS,JavaScript">
+	<meta name="author" content="Mark Tasaka 2016">
+
+
+
+	<link rel="stylesheet" href="css/kobolds_github.css"  />
+
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta charset="utf-8" />
+	
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-64250731-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	
+	</head>
+	
+<body>
+	
+	<header>
+		
+	</header>
+	
+	<section>
+				
+        <h1>KOBOLDS ATE MY BABY! IN COLOUR Random Kobold Generator</h1>
+		
+		<p>Welcome to the Launch Page of KOBOLDS ATE MY BABY! IN COLOUR Random Kobold Generator.  The Kobold Generator is designed using JavaScript and allow for the generation of a random kobold pen and paper character for Ninth Level Game's Kobolds Ate My Baby! In Colour.</p>
+        
+		<p>For more information on the KOBOLDS ATE MY BABY! IN COLOUR, please visit Ninth Level Games at:</p>
+		
+		<p><a href="http://www.9thlevel.com/" target="_blank" class="links">http://www.9thlevel.com/</a></p>
+		
+		<p>To see the generator used in the contents of the web, please visit:</p>
+		
+		<p><a href="http://www.oldschooladventures.org/kobolds/" target="_blank" class="links">http://www.oldschooladventures.org/kobolds/</a></p>
+		
+		
+		<h2>Random Kobold Generator</h2>
+		
+		<form action="" id ="myForm"  target="_blank">
+			
+			
+		<div class="content">
+            
+					<p><input type="checkbox" name="Dangerous! Weapon" value="1" class="check" id="weapon">Dangerous! Weapon</p>
+					
+					<p><input type="checkbox" name="Dangerous! Armour" value="1" class="check" id="armour">Danagerous! Armour</p>
+					
+					<p><input type="checkbox" name="Dangerour! Gear" value="1" class="check" id="gear">Dangerous! Gear</p>
+				
+			
+
+				<input type="submit" value="Generate Kobold" id="submit_button" / >
+				<input type="reset" value="Reset" id="reset_button" / >
+			
+				
+			</div>
+				</form>
+		
+		
+		
+		
+		</section>
+	
+	<script>
+		document.getElementById("submit_button").onclick =  function(){
+			var result = "";
+			
+			result += (document.getElementById("weapon").checked) ? "1" : "0";
+			result += (document.getElementById("armour").checked) ? "1" : "0";
+			result += (document.getElementById("gear").checked)   ? "1" : "0";
+			document.getElementById("myForm").action = "kobold/kobold_generator_incolor_" + result +".html";
+			
+		}
+		
+
+	</script>
+</body>
+</html>

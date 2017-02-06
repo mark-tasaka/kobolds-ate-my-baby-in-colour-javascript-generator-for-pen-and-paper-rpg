@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kobolds Ate My Baby! In Colour! Kobold Generator, Dangerous Weapon, Armour and Gear: Three Horrible Death Cheques</title>
+    
+	<meta charset="UTF-8">
+	<meta name="description" content="Random Kobold Generator for KOBOLDS ATE MY BABY! In Colour! Game Designed by Chris O'Neill, Dan Landis and John Kovalic, 2013 ">
+	<meta name="keywords" content="KOBOLDS ATE MY BABY!,HTML,CSS,JavaScript">
+	<meta name="author" content="Mark Tasaka 2016">
+	
+	<link rel="stylesheet" type="text/css" href="css/kobolds_sheet_incolor.css">
+</head>
+<body>
+	
+
+	
+    <div id="sheet">
+  <img id="character_sheet"/>
+    
+    <p id="name"></p>
+    <img id="brawn" />
+    <img id="ego" />
+    <img id="extra" />
+    <img id="reflexes" />
+    
+    <img id="meat" />
+    <img id="cunning" />
+    <img id="luck" />
+    <img id="agility" />
+    
+    <img id="hits" />
+    <img id="hitsPlusArmour" />
+ 
+    <img id="weapon" />
+    <img id="weaponDamage" />
+    <img id="weaponDamageMeat" />
+  
+    <img id="armour" />
+    <img id="armourHits" /> 
+        
+    <img id="edge1" />
+    <img id="edge2" />
+    <img id="edge3" />
+                
+    <img id="bogie1" />
+    <img id="bogie2" />
+    <img id="bogie3" />
+    
+		
+    <img id="gear" />
+		
+    <img id="magick" />
+    
+			
+    <img id="bully" />    
+    <img id="lift" />    
+    <img id="duel" /> 
+    <img id="sport" />    
+    <img id="heft" />   
+    <img id="swim" />      
+    <img id="wrassel" />        
+	
+		
+    <img id="fear" />    
+    <img id="shoot" />    
+    <img id="lackey" /> 
+    <img id="speakh" />    
+    <img id="sage" />    
+    <img id="trap" />   
+    <img id="tinker" />     
+	
+ 		
+    <img id="fast" />    
+    <img id="ride" />    
+    <img id="hide" /> 
+    <img id="sneak" />    
+    <img id="nature" />    
+    <img id="steal" />   
+    <img id="wiggle" />  
+		
+		
+    <img id="bard" />    
+    <img id="perform" />    
+    <img id="cook" /> 
+    <img id="speakc" />    
+    <img id="dungeon" />    
+    <img id="track" />  
+    <img id="nuture" />     
+    <img id="trade" />  
+    <img id="c_notes" />     
+
+  </div>
+	
+  <script>
+	  
+
+	  	/**
+	 * rollDice() is used to generate the dice rolls for the Kobold's
+	 * Core Statistics.
+	 * 
+	 * The parameters are used to allow for variation and customization of dice rolls.
+	 * 
+	 * @param numberOfSides - the number of sides the die has (i.e. d6)
+	 * @param numberOfDiceRolled - the number of dice rolled
+	 * @param numberOfDiceRemoved - the number of dice removed (i.e. roll 3d6 and drop the lowest)
+	 * @param baseValue - a value that is added to the die roll to modify the results of the roll
+	 * @return
+	 */
+function rollDice(numberOfSides, numberOfDiceRolled, numberOfDiceRemoved, baseValue) {
+    "use strict";
+	var i, numbers = [];
+    if (numberOfSides === undefined || typeof numberOfSides !== 'number' || numberOfSides <= 2 || numberOfSides >= 12) {
+        numberOfSides = 6;
+    }
+		
+    if (numberOfDiceRolled < 0) {
+        numberOfDiceRolled = 2;
+    }
+		
+    if (numberOfDiceRemoved === undefined || typeof numberOfDiceRemoved !== 'number' || numberOfDiceRemoved >= numberOfDiceRolled) {
+        numberOfDiceRemoved = 0;
+    }
+		
+    if (baseValue === undefined || typeof baseValue !== 'number' || baseValue < 0) {
+        baseValue = 0;
+    }
+		
+    for (i = 0; i < numberOfDiceRolled; i++) {
+        numbers[i] = Math.floor((Math.random() * 6) + 1);
+    }
+		
+    numbers.sort();
+        
+    var sum = baseValue;
+			
+    for (i = numberOfDiceRemoved; i < numberOfDiceRolled; i++) {
+        sum += numbers[i];
+    }
+			
+    return sum ;
+	}
+
+	
+	  function CharacterSheet() {
+		  
+		  var brawn      = rollDice(6, 2, 0, 0);
+		  var ego        = rollDice(6, 2, 0, 0);
+		  var extra		 = rollDice(6, 2, 0, 0);
+		  var reflexes   = rollDice(6, 2, 0, 0);
+		  var meat       = getMeat(brawn);
+		  var edges      = getEdges();
+		  var hits       = brawn + getHitsAdjust(edges[2]);
+		  var armour     = dangerousArmour();
+		  var weapon     = getDangerousWeapon();
+		  var rangeWeapon = getRangeWeapon();
+		  
+		  var koboldSheet = {
+			  "name" : "",
+			  "brawn": brawn,
+			  "ego": ego,
+			  "extra": extra,
+			  "reflexes": reflexes,
+			  "meat": meat,
+			  "cunning": getCunning(ego),
+			  "luck": getLuck(extra),
+			  "agility": getAgility(reflexes),
+			  "armour": armour,
+			  "edges": edges,
+			  "hits": hits,
+			  "hitsPlusArmour": hits + armour.hits,
+			  "bogies": getBogies(),
+			  "gear": getDangerousGear(),
+			  "gearBonus": getDangerousGearBonus(),
+			  "weapon": weapon,
+			  "weaponDamagePlusMeat": weapon.damage + meat,
+			  "rangeWeapon": rangeWeapon,
+			  "rangeWeaponDamagePlusMeat": rangeWeapon.damage + meat,
+			  "magick": getMagick()
+	
+
+		  };
+		  return koboldSheet;
+		  
+	  }
+	  
+
+	/**
+	 * getHitsAdjust(edges) - If the Kobold has the edge +EXTRA PADDING, then 1d6 randomly generated
+     * hits are added onto the Kobold's total Hits. 
+	 * 
+	 * @return the hits
+	 */
+	function getHitsAdjust (randomEdge) {
+        var adjust = 0;
+        if(randomEdge != undefined && randomEdge.edge == "+EXTRA PADDING"){
+        	adjust =  Math.floor((Math.random() * 6) + 1);
+        }
+		return adjust;
+	}
+	
+    /*
+    dangerousArmour() generates a piece of random armour using JSON.
+    */
+    function dangerousArmour(){
+        var armour = [
+            {id: 0, "hits": 8},
+            {id: 1, "hits": 10},
+            {id: 2, "hits": 8},
+            {id: 3, "hits": 8},
+            {id: 4, "hits": 6},
+            {id: 5, "hits": 6},
+            {id: 6, "hits": 12}
+        ];
+        return armour[Math.floor(Math.random() *6)]
+		
+  //      return armour[Math.floor(Math.random() *6) +1];
+    }
+        
+    /*
+    getEdges() selects the two Edges that Kobold automatically have, and selects a random Edge.
+    */
+    function getEdges(){
+        var edges = [
+            {id: 0, "edge": "+ANIMAL CHUM", "description": "+Animal Chum: Animals will not attack YOU, unless YOU threaten them."},
+            {id: 1, "edge": "+BOUNCY", "description": "+Bouncy: No matter how much damage YOU take when YOU fall, YOU will always have aleast 1 HIT Remaining.  Plus, YOU will land in an adjacent square."},
+            {id: 2, "edge": "+EXTRA PADDING", "description": "+Extra Padding: 1d6 extra HITS at KOBOLD creation (the extra HITS have been added to the Max HITS on the Character Sheet."},
+            {id: 3, "edge": "+TROLL BLOOD", "description": "+Troll Blood: YOU can spend 1 turn regain 2 lost HITS from licking your wounds."},
+            {id: 4, "edge": "+WINNING SMILE", "description": "+Winning Smile: As long as YOU are smiling, Humans will not attack YOU."},
+            {id: 5, "edge": "+ZILCH", "description": "+Zilch: No additional Edges."},
+            {id: 6, "edge": "+BARK LIKE A KOBOLD", "description": "+Bark Like A Kobold: Before rolling the dice, YOU can Bark, Growl or make Kobold Sounds to reduce the difficulty of an action by 1 die."},
+            {id: 7, "edge": "+KOBOLD SENSES", "description": "+Kobold Senses: Ability to Taste the Smell of Things, and the ability to see in total darkness."}
+        ];
+        return [edges[6], edges[7], edges[Math.floor(Math.random() * 6)]];    
+    }
+        
+    /*
+    getBogies() selects the two Bogies that Kobold automatically have, and selects a random Bogie.
+    */
+    function getBogies(){
+         var bogies = [
+            {"id": 0, "bogie": "-ANGRY FRIENDS", "description": "-Angry Friends: No additional Negative Qualities."},
+            {"id": 1, "bogie": "-ANIMAL FOE", "description": "-Animal Foe: All Animals within your map square will try to leave, and will attack YOU if you bother them."},
+            {"id": 2, "bogie": "-FOUL SMELLING", "description": "-Foul Smelling: Anything in your map square will Notice YOU."},
+            {"id": 3, "bogie": "-HUNGRY", "description": "-Hungry: Each time YOU come across something edible, YOU have to make an EGO nroll or go into a feed frenzy.  While in this frenzy, your EGO is reduce by 1 Die."},
+            {"id": 4, "bogie": "-IN HEAT", "description": "-In Heat: Each time YOU encounter an Adult Human (Elf, etc.) YOU have to make an Ego roll or attempt to HUMP the human's (elf, etc.) leg.  Each turn spent HUMPING reduces your Ego by 1 Die."},
+            {"id": 5, "bogie": "-TASTES LIKE BABY", "description": "-Tastes Like Baby: If YOU are wounded, every critter or kobold in YOUR map square must make an Ego roll at 3 Dice (kobolds with the -Hungry Bogie must make a 5 Dice Ego roll instead).  Failed rolls result in the critter or kobold developing a desire to eat YOU."},
+            {"id": 6, "bogie": "-FEARLESS", "description": "-Fearless: If the YOU are being exceptionally cowardly, the MAYOR may make YOU take a KOBOLD HORRIBLE DEATH CHECK."},
+            {"id": 7, "bogie": "-TASTES LIKE CHICKEN", "description": "-Tastes Like Chicken: Should YOU become wounded, all Critters in YOUR square must make a Ego roll with 1 Die. A failure will result in the critter developing the desire to eat YOU."}
+        ];
+        return [bogies[6], bogies[7], bogies[Math.floor(Math.random() * 6)]]; 
+    }
+        
+    /*
+    getDangerousGear() generates a piece of random gear using JSON.
+    */    
+    function getDangerousGear(){
+            var gear = [
+            {"id": 0},
+            {"id": 1},
+            {"id": 2},
+            {"id": 3},
+            {"id": 4},
+            {"id": 5}
+        ];
+        
+        return gear[Math.floor(Math.random() * 6)]; 
+    }
+	  
+	      /*
+    getDangerousGearBonus() generates a piece of random gear using JSON.  Use for Kobolds with
+	the Dungeon Skill
+    */    
+    function getDangerousGearBonus(){
+            var gear = [
+            {"id": 1},
+            {"id": 2},
+            {"id": 3},
+            {"id": 4},
+            {"id": 5},
+            {"id": 6},
+            {"id": 7},
+            {"id": 8},
+            {"id": 9},
+            {"id": 10},
+            {"id": 11}
+        ];
+        
+        return gear[Math.floor(Math.random() * 11)]; 
+    }
+                
+    /*
+    getDangerousWeapon() selects a random weapon using JSON.
+    */     
+    function getDangerousWeapon(){
+        var weapon = [
+            {"id": 0, "damage": 2},
+            {"id": 1, "damage": 2},
+            {"id": 2, "damage": 2},
+            {"id": 3, "damage": 2},
+            {"id": 4, "damage": 3},
+            {"id": 5, "damage": 3},
+            {"id": 6, "damage": 4}
+        ];
+        return weapon[Math.floor(Math.random() *6)];
+    }
+	  
+	      /*
+    getRangeWeapon() selects a random weapon using JSON.
+    */     
+    function getRangeWeapon(){
+        var range = [
+            {"id": 0, "damage": 1},
+            {"id": 1, "damage": 0},
+            {"id": 2, "damage": 0},
+            {"id": 3, "damage": 0},
+            {"id": 4, "damage": 0},
+            {"id": 5, "damage": 0},
+            {"id": 6, "damage": 0}
+        ];
+        return range[Math.floor(Math.random() *6)];
+    }
+	  
+	/**
+	*getMagick() gets a randomly generated magick spell (Lackey skill)
+	*/
+	function getMagick(){
+		var spell = [
+			{"id": 0},
+			{"id": 1},
+			{"id": 2},
+			{"id": 3},
+			{"id": 4},
+			{"id": 5},
+			{"id": 6},
+			{"id": 7},
+			{"id": 8},
+			{"id": 9},
+			{"id": 10}
+		];
+        return spell[Math.floor(Math.random() *11)];
+	}
+	  
+	/**
+	 * getMeat - Gets Meat, an vareger value dependent on the Brawn Statistics.
+	 * 
+	 * @return the meat
+	 */
+	function getMeat(brawn) {
+        if(brawn === undefined || typeof brawn !== 'number'|| brawn <=1 || brawn >=20){//invalid
+            brawn = 2;
+        }
+		if(brawn >=5 && brawn <=8){
+			return 2;
+		}
+		else if(brawn >=9 && brawn <=12){
+			return 3;
+		}
+		else if(brawn >=13 && brawn <=16){
+			return 4;
+		}
+		else if(brawn >=17 && brawn <=20){
+			return 5;
+		}	
+		return 1;
+	}
+
+
+	/**
+	 * getCunning - Gets Cunning, an vareger value dependent on the Ego Statistics.
+	 *  
+	 * @return the cunning
+	 */
+	function getCunning(ego) {
+        if(ego === undefined || typeof ego !== 'number'|| ego <=1 || ego >=20){//invalid
+            ego = 2;
+        }
+		if(ego >=5 && ego <=8){
+			return 2;
+		}
+		else if(ego >=9 && ego <=12){
+			return 3;
+		}
+		else if(ego >=13 && ego <=16){
+			return 4;
+		}
+		else if(ego >=17 && ego <=20){
+			return 5;
+		}	
+		return 1;
+	}
+
+
+
+
+	/**
+	 * getLuck - Gets Luck, an vareger value dependent on the Extraneous Statistics.
+	 * 
+	 * @return the luck
+	 */
+	function getLuck(extra) {
+        if(extra === undefined || typeof extra !== 'number'|| extra <=1 || extra >=20){//invalid
+            extra = 2;
+        }
+		if(extra >=5 && extra <=8){
+			return 2;
+		}
+		else if(extra >=9 && extra <=12){
+			return 3;
+		}
+		else if(extra >=13 && extra <=16){
+			return 4;
+		}
+		else if(extra >=17 && extra <=20){
+			return 5;
+		}	
+		return 1;
+	}
+	
+
+
+	/**
+	 * getAgility() - Gets Agility, an vareger value dependent on the Reflexes Statistics.
+	 * 
+	 * @return the agility
+	 */
+	function getAgility(reflexes) {
+        if(reflexes === undefined || typeof reflexes !== 'number'|| reflexes <=1 || reflexes >=20){//invalid
+            reflexes = 2;
+        }
+		if(reflexes >=5 && reflexes <=8){
+			return 2;
+		}
+		else if(reflexes >=9 && reflexes <=12){
+			return 3;
+		}
+		else if(reflexes >=13 && reflexes <=16){
+			return 4;
+		}
+		else if(reflexes >=17 && reflexes <=20){
+			return 5;
+		}	
+		return 1;
+	}
+	  
+
+function getSkills(ego) {
+	
+	var skills = [
+		//0-6
+		{"skill": "bully"},
+		{"skill": "lift"},
+		{"skill": "duel"},
+		{"skill": "sport"},
+		{"skill": "swim"},
+		{"skill": "heft"},
+		{"skill": "wrassel"},
+		
+		//7-13
+		{"skill": "fear"},
+		{"skill": "shoot"},
+		{"skill": "lackey"},
+		{"skill": "speakh"},
+		{"skill": "sage"},
+		{"skill": "trap"},
+		{"skill": "tinker"},
+		
+		//14-20
+		{"skill": "fast"},
+		{"skill": "ride"},
+		{"skill": "hide"},
+		{"skill": "sneak"},
+		{"skill": "nature"},
+		{"skill": "steal"},
+		{"skill": "wiggle"},
+		
+		//21-27
+		{"skill": "bard"},
+		{"skill": "perform"},
+		{"skill": "cook"},
+		{"skill": "speakc"},
+		{"skill": "dungeon"},
+		{"skill": "track"},
+		{"skill": "nuture"},
+		{"skill": "trade"}
+		
+		
+	];
+	var result = [skills[23].skill]; // if there is not any manditory one then say var result = [];
+	var functions = [
+		function(){return Math.floor(Math.random() * 7);},
+		function(){return Math.floor(Math.random() * 7) + 7;},
+		function(){return Math.floor(Math.random() * 7) + 14;},
+		function(){return Math.floor(Math.random() * 8) + 21;},
+		function(){return Math.floor(Math.random() * 27);}
+	];
+	
+	if(ego === undefined || typeof ego !== 'number' || ego <= 1 || ego > 12) {
+		ego = 1;
+	} else if(ego > 6){
+		ego = 6;
+	}
+	var numOfSkills = ego - 1;// if there is not any manditory one then say  ...= ego;
+	var categories = [1,1,1,1];
+	while (numOfSkills > 0 && numOfSkills >= ego - 3 ){
+		var categoryIndex = Math.floor(Math.random() * 3);
+		if(categories[categoryIndex] == 1){
+			var id_skill = functions[categoryIndex]();
+			result.push(skills[id_skill].skill);
+			numOfSkills--;
+			categories[categoryIndex] = 0;
+		}
+	}
+	while(numOfSkills > 0){
+		var id_skill = functions[4]();
+		if(result.toString().indexOf(skills[id_skill].skill) == -1){
+			result.push(skills[id_skill].skill);
+			numOfSkills--;
+		}
+	}
+	return result;
+}
+	  
+function checkSkills(doc,skills){
+
+		for(var i=0; i < skills.length; i++){
+			doc.getElementById(skills[i]).src = "images/c_check.png";
+		}
+
+}
+
+        var imgData = "images/c_sheet/kobold_sheet_in_colour_dc3.png";
+        document.getElementById("character_sheet").src = imgData;
+        
+
+	  var data = CharacterSheet();
+        document.getElementById("name").innerHTML = data.name;
+     
+        document.getElementById("brawn").src = "images/num_" + data.brawn +".png";
+        document.getElementById("ego").src = "images/num_" + data.ego +".png";
+        document.getElementById("extra").src = "images/num_" + data.extra +".png";
+        document.getElementById("reflexes").src = "images/num_" + data.reflexes +".png";
+                
+        document.getElementById("meat").src = "images/sm_num_" + data.meat +".png";
+        document.getElementById("cunning").src = "images/sm_num_" + data.cunning +".png";
+        document.getElementById("luck").src = "images/sm_num_" + data.luck +".png";
+        document.getElementById("agility").src = "images/sm_num_" + data.agility +".png";
+        
+        document.getElementById("hits").src = "images/sm_num_" + data.hits +".png";
+        document.getElementById("hitsPlusArmour").src = "images/sm_num_" + data.hitsPlusArmour +".png";
+
+     
+        document.getElementById("edge1").src = "images/c_edges/c_edge_" + data.edges[0].id +".png";
+        document.getElementById("edge2").src = "images/c_edges/c_edge_" + data.edges[1].id +".png";
+        document.getElementById("edge3").src = "images/c_edges/c_edge_" + data.edges[2].id +".png";
+      
+        document.getElementById("bogie1").src = "images/c_bogies/c_bogie_" + data.bogies[0].id +".png";
+        document.getElementById("bogie2").src = "images/c_bogies/c_bogie_" + data.bogies[1].id +".png";
+        document.getElementById("bogie3").src = "images/c_bogies/c_bogie_" + data.bogies[2].id +".png";
+	  
+	   var mySkills = getSkills(data.ego);
+       checkSkills(document,mySkills);
+	 
+	  /*
+	  +1 is applied to die roll for Armour if the lift skill is checked.
+	  */
+	  var adjust = (mySkills.toString().indexOf("lift") == -1) ? 0:1;
+	   document.getElementById("armour").src = "images/cd_armour/c_darmour_" + (data.armour.id + adjust) +".png";
+       document.getElementById("armourHits").src = "images/sm_num_" + (data.armour.hits) +".png";
+    
+	 if(mySkills.toString().indexOf("dungeon") != -1){ 
+        document.getElementById("gear").src = "images/cd_gearbonus/c_dgear_" + (data.gear.id) +".png";
+	 }
+	  else{
+        document.getElementById("gear").src = "images/cd_gear/c_dgear_" + (data.gear.id) +".png";
+		  
+	  }
+	  
+	    if(mySkills.toString().indexOf("lackey") != -1){
+			
+        document.getElementById("magick").src = "images/c_spells/c_spell_" + data.magick.id +".png";
+		}
+	  
+        document.getElementById("c_notes").src = "images/c_notes/c_notes7.png";
+
+	  
+	   var adjust2 = (mySkills.toString().indexOf("duel") == -1) ? 0:1;
+
+	   document.getElementById("weapon").src = "images/cd_weapon/c_dweapon_" + (data.weapon.id + adjust2) +".png";
+     
+	   document.getElementById("weaponDamage").src = "images/sm_num_" + data.weapon.damage +".png";
+       document.getElementById("weaponDamageMeat").src = "images/sm_num_" + data.weaponDamagePlusMeat +".png";
+
+
+    </script>
+    
+</body>
+</html>

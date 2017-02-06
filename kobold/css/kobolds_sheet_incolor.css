@@ -1,0 +1,350 @@
+/* Kobolds Ate My Baby! In Colour!
+--------------------*/
+
+
+#name{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+	font-size: 1.9em;
+}
+
+#brawn{
+    position:absolute;
+    top: 321px;
+    left: 135px;
+}
+
+#ego{
+    position: absolute;
+    top: 490px;
+    left: 132px;
+}
+
+#extra{
+    position: absolute;
+    top: 664px;
+    left: 135px;
+}
+
+#reflexes{
+    position: absolute;
+    top: 840px;
+    left: 125px;
+}
+
+#meat{
+    position: absolute;
+    top: 330px;
+    left: 225px;
+}
+
+#cunning{
+    position: absolute;
+    top: 497px;
+    left:  225px;
+}
+
+#luck{
+    position: absolute;
+    top: 669px;
+    left:  225px;
+}
+
+#agility{
+    position: absolute;
+    top: 849px;
+    left:  213px;
+}
+
+#hits{
+    position: absolute;
+    top: 159px;
+    left:  574px;
+}
+
+#hitsPlusArmour{
+    position: absolute;
+    top: 205px;
+    left:  574px;
+}
+
+#weapon{
+    position: absolute;
+    top: 780px;
+    left: 710px;
+}
+
+#weaponDamage{
+    position: absolute;
+    top: 745px;
+    left: 905px;
+}
+
+#weaponDamageMeat{
+    position: absolute;
+    top: 790px;
+    left: 905px;
+}
+
+#armour{
+    position: absolute;
+    top: 645px;
+    left: 715px;
+}
+
+#armourHits{
+    position: absolute;
+    top: 670px;
+    left: 909px;
+}
+
+#edge1{
+    position: absolute;
+    top: 285px;
+    left: 715px;
+}
+
+#edge2{
+    position: absolute;
+    top: 332px;
+    left: 715px;
+}
+
+
+#edge3{
+    position: absolute;
+    top: 362px;
+    left: 715px;
+}
+
+#bogie1{
+    position: absolute;
+    top: 460px;
+    left: 715px;
+}
+
+#bogie2{
+    position: absolute;
+    top: 495px;
+    left: 715px;
+}
+
+
+#bogie3{
+    position: absolute;
+    top: 545px;
+    left: 715px;
+}
+
+#gear{
+    position: absolute;
+    top: 910px;
+    left: 740px;
+}
+
+#magick{
+    position: absolute;
+    top: 1050px;
+    left: 620px;
+}
+
+
+/*Brawn Skills*/
+
+#bully{
+    position:absolute;
+    top: 282px;
+    left: 314px;
+}
+
+#lift{
+    position:absolute;
+    top: 282px;
+    left: 487px;
+}
+
+#duel{
+    position:absolute;
+    top: 315px;
+    left: 314px;
+}
+
+#sport{
+    position:absolute;
+    top: 315px;
+    left: 487px;
+}
+
+
+#heft{
+    position:absolute;
+    top: 351px;
+    left: 314px;
+}
+
+#swim{
+    position:absolute;
+    top: 351px;
+    left: 487px;
+}
+
+#wrassel{
+    position:absolute;
+    top: 390px;
+    left: 487px;
+}
+
+/*Ego Skills*/
+
+
+#fear{
+    position:absolute;
+    top: 450px;
+    left: 314px;
+}
+
+#shoot{
+    position:absolute;
+    top: 450px;
+    left: 484px;
+}
+
+#lackey{
+    position:absolute;
+    top: 485px;
+    left: 314px;
+}
+
+#speakh{
+    position:absolute;
+    top: 485px;
+    left: 484px;
+}
+
+
+#sage{
+    position:absolute;
+    top: 525px;
+    left: 314px;
+}
+
+#trap{
+    position:absolute;
+    top: 525px;
+    left: 484px;
+}
+
+
+#tinker{
+    position:absolute;
+    top: 560px;
+    left: 484px;
+}
+
+
+/*Extra skills*/
+
+
+#bard{
+    position:absolute;
+    top: 623px;
+    left: 314px;
+}
+
+#perform{
+    position:absolute;
+    top: 623px;
+    left: 484px;
+}
+
+#cook{
+    position:absolute;
+    top: 664px;
+    left: 314px;
+}
+
+#speakc{
+    position:absolute;
+    top: 664px;
+    left: 484px;
+}
+
+
+#dungeon{
+    position:absolute;
+    top: 701px;
+    left: 314px;
+}
+
+#track{
+    position:absolute;
+    top: 701px;
+    left: 484px;
+}
+
+#nature{
+    position:absolute;
+    top: 740px;
+    left: 314px;
+}
+
+#trade{
+    position:absolute;
+    top: 740px;
+    left: 484px;
+}
+
+
+
+/*Reflex skills*/
+
+
+#fast{
+    position:absolute;
+    top: 802px;
+    left: 312px;
+}
+
+#ride{
+    position:absolute;
+    top: 802px;
+    left: 484px;
+}
+
+#hide{
+    position:absolute;
+    top: 839px;
+    left: 312px;
+}
+
+#sneak{
+    position:absolute;
+    top: 839px;
+    left: 484px;
+}
+
+
+#nurture{
+    position:absolute;
+    top: 877px;
+    left: 312px;
+}
+
+#steal{
+    position:absolute;
+    top: 877px;
+    left: 484px;
+}
+
+#wiggle{
+    position:absolute;
+    top: 914px;
+    left: 484px;
+}
+
+#c_notes{
+    position:absolute;
+    top: 1215px;
+    left: 400px;
+}
